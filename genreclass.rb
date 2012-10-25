@@ -3,22 +3,20 @@
 class Genre
 	attr_accessor :name, :songs, :artists
 
-@@genres = []
 
 	def initialize
-		@name = name
 		@songs = []
 		@artists = []
-		@@genres << self
+		Genre.all << self
 	end
 
 	def self.all
-  		@@genres
+  		@@genres ||= []
  	end
 
-	def count
-		self.artists.size
-	end	
+	# def count
+	# 	self.artists.size
+	# end	
 
 	def self.reset_genres
   		@@genres = []

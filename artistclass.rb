@@ -3,24 +3,16 @@
 class Artist
 	attr_accessor :name, :songs, :genres
 
-@@artist = []
 
-	def self.reset_artists
-		@@artist = []	
-	end	
-	
 	def initialize
-		@name = name
 		@songs = []
-		@artist = []
 		@genres = []
-		@@artist << self
+		Artist.all << self
 	end	
 
-	
 
 	def self.all
-  	@@artist
+  	@@artists ||= []
  	end
 	
 	# def count
@@ -32,18 +24,26 @@ class Artist
  	end
 	
 	def songs_count
-  	self.songs.size
+  	self.songs.count
  	end	
+
+		def self.reset_artists
+		@@artists = []	
+	end	
 	
 	def add_song(song)
-		@songs << song
-		@genres << song.genre
-		song.genre.artists << self if song.genre
-		@@artist << self 
+		self.songs << song
+		self.genres << song.genre
+
+		if song.genre
+			song.genre.artists << self 
+			song.genre.artists.uniq!
+		end	
+		# @@artists << self
 	end	
 
 	def genre=(genre)
-		@genres << genre
+		@genre = genre
 		genre.artists << self
 	end	
 

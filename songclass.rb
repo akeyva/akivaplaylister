@@ -5,13 +5,10 @@ class Song
 
 	def initialize
 		@name = ""
-		@genres = []
-    @artist = nil
-    @genre = ""
 	end
 	
 	def genre=(genre)
-		@genres << genre
+		@genre = genre
 		genre.songs << self
 	end		
 
